@@ -13,3 +13,7 @@ This is a FastAPI-based web application that analyzes molecular dynamics (MD) si
 - ⚙️ Backend built with **FastAPI**
 - 📊 Plots rendered with **Plotly**
 - 🔬 Analysis powered by **ProDy**
+
+Running the App
+
+uvicorn app.main:app --reload
