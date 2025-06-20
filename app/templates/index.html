@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Protein Dinamiği Analiz Web App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .custom-card { box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 12px; }
+        .upload-label { font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card custom-card p-4">
+                <h1 class="mb-4 text-center">Protein Dinamiği Analiz Web App</h1>
+                <form method="post" action="/analyze" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="pdb_file" class="form-label upload-label">PDB Dosyası Seç (.pdb):</label>
+                        <input class="form-control" type="file" id="pdb_file" name="pdb_file" accept=".pdb" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dcd_file" class="form-label upload-label">DCD Dosyası Seç (.dcd):</label>
+                        <input class="form-control" type="file" id="dcd_file" name="dcd_file" accept=".dcd" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Analiz Et</button>
+                </form>
+                {% if error %}
+                    <div class="alert alert-danger mt-3">{{ error }}</div>
+                {% endif %}
+                {% if rmsd_plot or rmsf_plot %}
+                <div class="row mt-4">
+                    {% if rmsd_plot %}
+                    <div class="col-md-12 mb-4">
+                        <div class="card p-3">
+                            <h4 class="text-center">RMSD Zaman Serisi</h4>
+                            {{ rmsd_plot | safe }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if rmsf_plot %}
+                    <div class="col-md-12">
+                        <div class="card p-3">
+                            <h4 class="text-center">RMSF Profili (Cα atomları)</h4>
+                            {{ rmsf_plot | safe }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

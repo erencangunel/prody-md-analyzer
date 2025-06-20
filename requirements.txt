@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+jinja2
+plotly
+mdtraj
+numpy
+pandas
+prody
+matplotlib 
